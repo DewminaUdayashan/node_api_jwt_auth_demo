@@ -13,6 +13,7 @@ app.use(express.json());
 let refreshTokens = [];
 
 
+
 // refreshing the token from user refresh token when they posted it
 app.post('/token',(req,res)=>{
     // get refresh token from the request body
@@ -39,7 +40,7 @@ app.post('/login', (req, res) => {
     const username = req.body.username;
     // this object hold user data, change this as needed
     const user = { name: username, designation: 'App Dev' };
-    const accessToken = generateAccessToken(user,process.env.REFRESH_TOKEN_SECRET);
+    const accessToken = generateAccessToken(user,process.env.REFRESH_TOKEN_SECRET,{});
     const refreshToken = jwt.sign(user,process.env.REFRESH_TOKEN_SECRET);
     // save referesh tokens in the DB when they are created
     refreshTokens.push(refreshToken);
